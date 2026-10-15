@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { Midia } from "@/content/site";
+import { semAutoplay } from "./economia";
 import Esboco from "./Esboco";
 
 const proporcoes: Record<Midia["proporcao"], string> = {
@@ -29,7 +30,7 @@ export default function Quadro({
 
   useEffect(() => {
     const v = video.current;
-    if (!v) return;
+    if (!v || semAutoplay()) return;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) v.play().catch(() => {});

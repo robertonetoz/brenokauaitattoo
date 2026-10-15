@@ -3,6 +3,7 @@
 import { useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { reel } from "@/content/site";
+import { semAutoplay } from "./economia";
 import Revelar from "./Revelar";
 
 /* O vídeo de apresentação dos trabalhos: toca sem som quando aparece na tela. */
@@ -14,7 +15,7 @@ export default function Reel({ className = "" }: { className?: string }) {
 
   useEffect(() => {
     const v = video.current;
-    if (!v || reduzir) return;
+    if (!v || reduzir || semAutoplay()) return;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) v.play().catch(() => {});

@@ -53,7 +53,7 @@ export default function Trabalhos() {
                       type="button"
                       aria-pressed={ativo}
                       onClick={() => setFiltro(f)}
-                      className={`relative whitespace-nowrap rounded-full border px-4 py-2 text-[0.88rem] transition-colors duration-300 ${
+                      className={`relative whitespace-nowrap rounded-full border px-4 py-2.5 text-[0.88rem] sm:py-2 transition-colors duration-300 ${
                         ativo ? "border-tinta text-parede" : "border-tinta/20 hover:border-tinta/60"
                       }`}
                     >

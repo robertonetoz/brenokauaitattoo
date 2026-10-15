@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useCallback, useEffect, useRef, useState } from "react";
 import { contato, estudio } from "@/content/site";
 import Quadro from "./Quadro";
+import { useTelaLarga } from "./useTelaLarga";
 import Visualizador from "./Visualizador";
 
 const larguras: Record<string, string> = {
@@ -20,6 +21,7 @@ export default function Estudio() {
   const [distancia, setDistancia] = useState(0);
   const [aberto, setAberto] = useState<number | null>(null);
   const reduzir = useReducedMotion();
+  const largo = useTelaLarga();
   const fechar = useCallback(() => setAberto(null), []);
 
   useEffect(() => {
@@ -35,7 +37,8 @@ export default function Estudio() {
 
   const { scrollYProgress } = useScroll({ target: secao, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], [0, -distancia]);
-  const fixo = !reduzir;
+  // no desktop a rolagem vertical empurra a faixa; no celular é um carrossel de deslizar
+  const fixo = largo && !reduzir;
 
   return (
     <section
@@ -58,11 +61,11 @@ export default function Estudio() {
           ref={trilho}
           style={fixo ? { x } : undefined}
           className={`mt-12 flex w-max items-end gap-4 px-4 sm:gap-6 sm:px-8 lg:px-12 ${
-            fixo ? "" : "no-scrollbar max-w-full overflow-x-auto"
+            fixo ? "" : "no-scrollbar max-w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-4 sm:scroll-px-8"
           }`}
         >
           {estudio.map((e, i) => (
-            <li key={e.id} className={`shrink-0 ${larguras[e.proporcao]} ${i % 2 ? "self-start" : ""}`}>
+            <li key={e.id} className={`shrink-0 snap-start ${larguras[e.proporcao]} ${i % 2 ? "lg:self-start" : ""}`}>
               <button type="button" onClick={() => setAberto(i)} className="block w-full text-left" aria-label={`Ver ${e.legenda}`}>
                 <Quadro item={e} tom="escuro" sizes="(min-width: 1024px) 34vw, 78vw" />
                 <span className="mt-3 block font-display text-lg italic text-parede/80">{e.legenda}</span>

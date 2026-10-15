@@ -46,6 +46,22 @@ export default function Estilos() {
                     {s.texto}
                   </span>
                 </button>
+                {/* no celular o esboço abre logo abaixo do estilo tocado */}
+                <AnimatePresence initial={false}>
+                  {ativo === i && (
+                    <motion.div
+                      className="overflow-hidden lg:hidden"
+                      initial={{ height: 0 }}
+                      animate={{ height: "auto" }}
+                      exit={{ height: 0 }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <div className="grid h-52 place-items-center pb-6 text-parede">
+                        <Esboco motivo={s.motivo} animar="montagem" duracao={1.4} className="h-full w-full" />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             ))}
           </ul>

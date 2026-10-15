@@ -72,11 +72,12 @@ function gerarCaminho(w: number, h: number) {
   if (!w || !h) return "";
   const segmentos = Math.max(1, Math.round(h / (w < 768 ? 620 : 820)));
   const passo = h / segmentos;
-  const margem = w < 768 ? 14 : Math.max(28, w * 0.035);
-  const xs = [w - margem, margem];
+  // no celular a linha fica na margem direita, sem cruzar o texto
+  const xs = w < 768 ? [w - 6, w - 13] : [w - Math.max(28, w * 0.035), Math.max(28, w * 0.035)];
   let y = 0;
-  let d = `M${w * 0.82} 0`;
-  let xAnterior = w * 0.82;
+  const inicio = w < 768 ? xs[1] : w * 0.82;
+  let d = `M${inicio} 0`;
+  let xAnterior = inicio;
   for (let i = 0; i < segmentos; i++) {
     const proxY = y + passo;
     const x = xs[i % 2];

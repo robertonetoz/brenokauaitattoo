@@ -21,6 +21,8 @@ export default function Visualizador({
   aoMudar: (i: number) => void;
 }) {
   const fechar = useRef<HTMLButtonElement>(null);
+  const inicioToque = useRef(0);
+  const deslizou = useRef(false);
   const aberto = indice !== null;
   const item = aberto ? itens[indice] : null;
 
@@ -78,7 +80,22 @@ export default function Visualizador({
               </button>
             </div>
 
-            <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 sm:px-20" onClick={aoFechar}>
+            <div
+              className="relative flex min-h-0 flex-1 touch-pan-y items-center justify-center px-4 sm:px-20"
+              onClick={() => !deslizou.current && aoFechar()}
+              onPointerDown={(e) => {
+                inicioToque.current = e.clientX;
+                deslizou.current = false;
+              }}
+              onPointerUp={(e) => {
+                // deslizar para o lado troca de foto no celular
+                const dx = e.clientX - inicioToque.current;
+                if (Math.abs(dx) > 50) {
+                  deslizou.current = true;
+                  ir(dx < 0 ? 1 : -1);
+                }
+              }}
+            >
               <AnimatePresence mode="wait">
                 <motion.figure
                   key={item.id}
