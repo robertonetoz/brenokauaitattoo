@@ -179,6 +179,8 @@ export type Slide =
 export type Destaque = {
   id: string;
   nome: string;
+  /** o destaque completo no Instagram */
+  instagram: string;
   capa: { src?: string; motivo: Motivo };
   slides: Slide[];
   acao?: { rotulo: string; href: string };
@@ -188,6 +190,7 @@ export const destaques: Destaque[] = [
   {
     id: "feedbacks",
     nome: "Feedbacks",
+    instagram: "https://www.instagram.com/stories/highlights/17925562520307846/",
     capa: { src: "/trabalhos/lirio-braco.jpg", motivo: "lirio" },
     slides: avaliacoes.slice(0, 5).map((a) => ({
       tipo: "texto" as const,
@@ -199,6 +202,7 @@ export const destaques: Destaque[] = [
   {
     id: "cicatrizadas",
     nome: "Cicatrizadas",
+    instagram: "https://www.instagram.com/stories/highlights/17922338311572344/",
     capa: { motivo: "ramo" },
     slides: [
       {
@@ -214,6 +218,7 @@ export const destaques: Destaque[] = [
   {
     id: "atendimentos",
     nome: "Atendimentos",
+    instagram: "https://www.instagram.com/stories/highlights/18350427904186510/",
     capa: { src: "/media/trabalhando.jpg", motivo: "maquina" },
     slides: [
       {
@@ -233,6 +238,7 @@ export const destaques: Destaque[] = [
   {
     id: "mentoria",
     nome: "Mentoria",
+    instagram: "https://www.instagram.com/stories/highlights/18090014107444797/",
     capa: { motivo: "maquina" },
     slides: [
       {

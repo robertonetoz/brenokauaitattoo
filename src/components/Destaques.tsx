@@ -13,6 +13,8 @@ const DURACAO_IMAGEM = 5000;
 
 export default function Destaques() {
   const [aberto, setAberto] = useState<number | null>(null);
+  // cada abertura ganha uma chave nova, para não reaproveitar um story que ainda está saindo
+  const [sessao, setSessao] = useState(0);
   const origem = useRef<HTMLButtonElement | null>(null);
 
   const fechar = useCallback(() => {
@@ -40,6 +42,7 @@ export default function Destaques() {
                 type="button"
                 onClick={(e) => {
                   origem.current = e.currentTarget;
+                  setSessao((s) => s + 1);
                   setAberto(i);
                 }}
                 className="group flex flex-col items-center gap-4"
@@ -55,7 +58,7 @@ export default function Destaques() {
 
       <Portal>
         <AnimatePresence>
-          {aberto !== null && <Stories key="stories" inicio={aberto} aoFechar={fechar} />}
+          {aberto !== null && <Stories key={sessao} inicio={aberto} aoFechar={fechar} />}
         </AnimatePresence>
       </Portal>
     </section>
@@ -217,7 +220,7 @@ function Stories({ inicio, aoFechar }: { inicio: number; aoFechar: () => void })
             transition={{ duration: 0.25 }}
           >
             {atual.tipo === "texto" && (
-              <div className="flex h-full flex-col justify-center px-8 pb-24 pt-24 sm:px-10">
+              <div className="flex h-full flex-col justify-center px-8 pb-32 pt-24 sm:px-10">
                 <Esboco motivo="lirio" animar="montagem" className="absolute -right-10 bottom-0 h-[55%] w-[60%] text-parede/15" />
                 {atual.titulo && <p className="mb-6 font-display text-lg italic text-estencil-claro">{atual.titulo}</p>}
                 <p className="relative font-display text-[clamp(1.5rem,3.2vh,2.1rem)] leading-[1.22] tracking-[-0.01em]">
@@ -250,7 +253,7 @@ function Stories({ inicio, aoFechar }: { inicio: number; aoFechar: () => void })
               />
             )}
             {atual.tipo !== "texto" && atual.legenda && (
-              <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-tinta/80 to-transparent px-6 pb-24 pt-16 font-display text-lg italic">
+              <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-tinta/80 to-transparent px-6 pb-32 pt-16 font-display text-lg italic">
                 {atual.legenda}
               </p>
             )}
@@ -314,18 +317,27 @@ function Stories({ inicio, aoFechar }: { inicio: number; aoFechar: () => void })
           </div>
         </div>
 
-        {destaque.acao && (
-          <div className="absolute inset-x-0 bottom-0 z-20 flex justify-center px-6 pb-6">
+        {/* ação principal do destaque e o atalho para o destaque completo no Instagram */}
+        <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 px-6 pb-5">
+          <a
+            href={destaque.acao?.href ?? destaque.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-parede px-6 py-3 text-[0.9rem] text-tinta transition-colors hover:bg-estencil hover:text-parede"
+          >
+            {destaque.acao?.rotulo ?? "Ver destaque completo no Instagram"}
+          </a>
+          {destaque.acao && (
             <a
-              href={destaque.acao.href}
+              href={destaque.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-parede px-6 py-3 text-[0.9rem] text-tinta transition-colors hover:bg-estencil hover:text-parede"
+              className="link-traco pb-0.5 text-[0.8rem] text-parede/80"
             >
-              {destaque.acao.rotulo}
+              Ver destaque completo no Instagram
             </a>
-          </div>
-        )}
+          )}
+        </div>
 
         <p className="sr-only" aria-live="polite">
           {destaque.nome}, {slide + 1} de {destaque.slides.length}
