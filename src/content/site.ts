@@ -182,6 +182,7 @@ export type Destaque = {
   /** o destaque completo no Instagram */
   instagram: string;
   capa: { src?: string; motivo: Motivo };
+  /** sem slides, o destaque abre direto no Instagram */
   slides: Slide[];
   acao?: { rotulo: string; href: string };
 };
@@ -203,17 +204,8 @@ export const destaques: Destaque[] = [
     id: "cicatrizadas",
     nome: "Cicatrizadas",
     instagram: "https://www.instagram.com/stories/highlights/17922338311572344/",
-    capa: { motivo: "ramo" },
-    slides: [
-      {
-        tipo: "texto",
-        titulo: "Depois da cicatrização",
-        texto: "Tatuagem boa é a que continua bonita meses depois. Aqui estão algumas já cicatrizadas.",
-      },
-      { tipo: "imagem", motivo: "ramo", legenda: "Ramo fino, cicatrizado" },
-      { tipo: "imagem", motivo: "lirio", legenda: "Lírio, cicatrizado" },
-      { tipo: "imagem", motivo: "pontilhismo", legenda: "Pontilhismo, cicatrizado" },
-    ],
+    capa: { src: "/trabalhos/fenix-braco.jpg", motivo: "ramo" },
+    slides: [],
   },
   {
     id: "atendimentos",

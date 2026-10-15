@@ -11,6 +11,9 @@ import { liberarRolagem, travarRolagem } from "./RolagemSuave";
 const DURACAO_TEXTO = 6500;
 const DURACAO_IMAGEM = 5000;
 
+// destaques com slides abrem aqui no site; os outros vão direto para o Instagram
+const noSite = destaques.filter((d) => d.slides.length > 0);
+
 export default function Destaques() {
   const [aberto, setAberto] = useState<number | null>(null);
   // cada abertura ganha uma chave nova, para não reaproveitar um story que ainda está saindo
@@ -36,21 +39,34 @@ export default function Destaques() {
         </div>
 
         <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-4 lg:col-span-7">
-          {destaques.map((d, i) => (
+          {destaques.map((d) => (
             <li key={d.id} className="flex justify-center">
-              <button
-                type="button"
-                onClick={(e) => {
-                  origem.current = e.currentTarget;
-                  setSessao((s) => s + 1);
-                  setAberto(i);
-                }}
-                className="group flex flex-col items-center gap-4"
-                aria-label={`Abrir destaque ${d.nome}`}
-              >
-                <Anel destaque={d} />
-                <span className="font-display text-lg italic xl:text-xl">{d.nome}</span>
-              </button>
+              {d.slides.length === 0 ? (
+                <a
+                  href={d.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-4"
+                  aria-label={`Abrir destaque ${d.nome} no Instagram`}
+                >
+                  <Anel destaque={d} />
+                  <span className="font-display text-lg italic xl:text-xl">{d.nome}</span>
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    origem.current = e.currentTarget;
+                    setSessao((s) => s + 1);
+                    setAberto(noSite.indexOf(d));
+                  }}
+                  className="group flex flex-col items-center gap-4"
+                  aria-label={`Abrir destaque ${d.nome}`}
+                >
+                  <Anel destaque={d} />
+                  <span className="font-display text-lg italic xl:text-xl">{d.nome}</span>
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -116,13 +132,13 @@ function Stories({ inicio, aoFechar }: { inicio: number; aoFechar: () => void })
   const video = useRef<HTMLVideoElement>(null);
   const fecharBtn = useRef<HTMLButtonElement>(null);
 
-  const destaque = destaques[grupo];
+  const destaque = noSite[grupo];
   const atual: Slide = destaque.slides[slide];
 
   const avancar = useCallback(() => {
     setProgresso(0);
     if (slide < destaque.slides.length - 1) setSlide((s) => s + 1);
-    else if (grupo < destaques.length - 1) {
+    else if (grupo < noSite.length - 1) {
       setGrupo((g) => g + 1);
       setSlide(0);
     } else aoFechar();
@@ -133,7 +149,7 @@ function Stories({ inicio, aoFechar }: { inicio: number; aoFechar: () => void })
     if (slide > 0) setSlide((s) => s - 1);
     else if (grupo > 0) {
       setGrupo((g) => g - 1);
-      setSlide(destaques[grupo - 1].slides.length - 1);
+      setSlide(noSite[grupo - 1].slides.length - 1);
     }
   }, [slide, grupo, setProgresso]);
 
