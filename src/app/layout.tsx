@@ -17,7 +17,7 @@ const hanken = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://brenokauaitattoo.com.br"),
+  metadataBase: new URL("https://brenokauaitattoo.vercel.app"),
   title: "Breno Kauai | Tatuador em Uberlândia",
   description:
     "Eu enxergo o que você sente. E transformo em arte aquilo que te habita. Tatuagens em fine line, floral, mandala e pontilhismo delicado em Uberlândia, MG.",
@@ -25,9 +25,15 @@ export const metadata: Metadata = {
     title: "Breno Kauai | Tatuador em Uberlândia",
     description:
       "Tatuagens em fine line, floral, mandala e pontilhismo delicado. Estúdio em Uberlândia, MG.",
-    images: ["/media/retrato.jpg"],
+    url: "/",
+    siteName: "Breno Kauai Tattoo",
     locale: "pt_BR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Breno Kauai | Tatuador em Uberlândia",
+    description: "Tatuagens em fine line, floral, mandala e pontilhismo delicado. Estúdio em Uberlândia, MG.",
   },
 };
 
