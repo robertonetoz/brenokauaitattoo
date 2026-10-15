@@ -17,13 +17,7 @@ export type Motivo =
   | "maca"
   | "tintas";
 
-export type Estilo =
-  | "Floral"
-  | "Fine line"
-  | "Mandala"
-  | "Pontilhismo"
-  | "Geométrico"
-  | "Lettering";
+export type Estilo = "Floral" | "Fine line" | "Mandala" | "Pontilhismo" | "Realismo";
 
 export type Midia = {
   id: string;
@@ -66,29 +60,25 @@ export const mensagens = {
   mentoria: "Olá, Breno! Vim pelo site e quero saber mais sobre a mentoria.",
 };
 
-export const estilos: Estilo[] = [
-  "Floral",
-  "Fine line",
-  "Mandala",
-  "Pontilhismo",
-  "Geométrico",
-  "Lettering",
+// A ordem aqui é a ordem da galeria. Os filtros aparecem conforme os estilos usados.
+export const trabalhos: Trabalho[] = [
+  { id: "mariposa", tipo: "imagem", src: "/trabalhos/mariposa-costas.jpg", estilo: "Fine line", motivo: "mariposa", proporcao: "1/1", alt: "Mariposa ornamental com fases da lua e folhas, ocupando as costas inteiras", legenda: "Mariposa e fases da lua, costas" },
+  { id: "onca", tipo: "imagem", src: "/trabalhos/onca-floral-panturrilha.jpg", estilo: "Realismo", motivo: "lirio", proporcao: "1/1", alt: "Onça olhando para uma borboleta, cercada de flores, na panturrilha", legenda: "Onça e flores, panturrilha" },
+  { id: "video-perna", tipo: "video", src: "/trabalhos/video-a.mp4", estilo: "Floral", motivo: "lirio", proporcao: "9/16", alt: "Vídeo de uma tatuagem floral na perna, do estêncil ao resultado", legenda: "Do estêncil à pele, perna" },
+  { id: "lirio", tipo: "imagem", src: "/trabalhos/lirio-braco.jpg", estilo: "Floral", motivo: "lirio", proporcao: "1/1", alt: "Lírio em traço fino com haste em laço no braço", legenda: "Lírio, braço" },
+  { id: "mandala", tipo: "imagem", src: "/trabalhos/mandala-floral-quadril.jpg", estilo: "Mandala", motivo: "mandala", proporcao: "4/5", alt: "Mandala com peônias e folhas na lateral do quadril", legenda: "Mandala e peônias, quadril" },
+  { id: "fenix", tipo: "imagem", src: "/trabalhos/fenix-braco.jpg", estilo: "Pontilhismo", motivo: "pontilhismo", proporcao: "4/5", alt: "Fênix em pontilhismo com lua e estrelas no braço", legenda: "Fênix, braço" },
+  { id: "pets", tipo: "imagem", src: "/trabalhos/retrato-pets-tornozelo.jpg", estilo: "Realismo", motivo: "letras", proporcao: "1/1", alt: "Retrato de dois cachorros com os nomes Mel e Devassa no tornozelo, ao lado dos próprios cães", legenda: "Retrato pet com nomes, tornozelo" },
+  { id: "video-braco", tipo: "video", src: "/trabalhos/video-b.mp4", estilo: "Fine line", motivo: "ramo", proporcao: "9/16", alt: "Vídeo de uma tatuagem em traço fino no braço", legenda: "Traço fino, braço" },
+  { id: "iris", tipo: "imagem", src: "/trabalhos/iris-braco.jpg", estilo: "Floral", motivo: "lirio", proporcao: "1/1", alt: "Íris e botões de flor contornando o braço", legenda: "Íris, braço" },
+  { id: "polvo", tipo: "imagem", src: "/trabalhos/polvo-ombro.jpg", estilo: "Realismo", motivo: "pontilhismo", proporcao: "4/5", alt: "Polvo realista com tentáculos enrolados no ombro", legenda: "Polvo, ombro" },
 ];
 
-export const trabalhos: Trabalho[] = [
-  { id: "t1", tipo: "imagem", estilo: "Floral", motivo: "lirio", proporcao: "3/4", alt: "Lírio em traço fino no antebraço", legenda: "Lírio, antebraço" },
-  { id: "t2", tipo: "imagem", estilo: "Fine line", motivo: "ramo", proporcao: "4/5", alt: "Ramo botânico delicado ao longo da coluna", legenda: "Ramo, coluna" },
-  { id: "t3", tipo: "video", estilo: "Floral", motivo: "lirio", proporcao: "9/16", alt: "Vídeo de fechamento floral na perna", legenda: "Fechamento floral, perna" },
-  { id: "t4", tipo: "imagem", estilo: "Mandala", motivo: "mandala", proporcao: "1/1", alt: "Mandala em pontilhismo no ombro", legenda: "Mandala, ombro" },
-  { id: "t5", tipo: "imagem", estilo: "Pontilhismo", motivo: "pontilhismo", proporcao: "4/5", alt: "Sombreado em pontilhismo delicado", legenda: "Pontilhismo, costela" },
-  { id: "t6", tipo: "imagem", estilo: "Fine line", motivo: "mariposa", proporcao: "3/4", alt: "Mariposa ornamental nas costas", legenda: "Mariposa, costas" },
-  { id: "t7", tipo: "imagem", estilo: "Lettering", motivo: "letras", proporcao: "2/3", alt: "Escrita personalizada em traço fino", legenda: "Lettering, punho" },
-  { id: "t8", tipo: "video", src: "/media/orcamento.mp4", estilo: "Fine line", motivo: "ramo", proporcao: "9/16", alt: "Vídeo de uma sessão, do estêncil ao traço", legenda: "Bastidores de uma sessão" },
-  { id: "t9", tipo: "imagem", estilo: "Geométrico", motivo: "geometrico", proporcao: "4/5", alt: "Composição geométrica com linhas finas", legenda: "Geométrico, antebraço" },
-  { id: "t10", tipo: "imagem", estilo: "Floral", motivo: "lirio", proporcao: "4/5", alt: "Lírio delicado na lateral do abdômen", legenda: "Lírio, abdômen" },
-  { id: "t11", tipo: "imagem", estilo: "Mandala", motivo: "mandala", proporcao: "3/4", alt: "Meia mandala no cotovelo", legenda: "Mandala, cotovelo" },
-  { id: "t12", tipo: "video", estilo: "Pontilhismo", motivo: "pontilhismo", proporcao: "9/16", alt: "Vídeo de tatuagem em pontilhismo", legenda: "Pontilhismo em vídeo" },
-];
+export const reel = {
+  src: "/media/meus-trabalhos.mp4",
+  alt: "Vídeo do Breno tatuando no estúdio, com alguns dos trabalhos dele",
+  legenda: "Um pouco do meu dia no estúdio",
+};
 
 export const servicos = {
   estilos: [
@@ -198,7 +188,7 @@ export const destaques: Destaque[] = [
   {
     id: "feedbacks",
     nome: "Feedbacks",
-    capa: { motivo: "lirio" },
+    capa: { src: "/trabalhos/lirio-braco.jpg", motivo: "lirio" },
     slides: avaliacoes.slice(0, 5).map((a) => ({
       tipo: "texto" as const,
       texto: a.texto,

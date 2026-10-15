@@ -57,91 +57,91 @@ export default function Visualizador({
 
   return (
     <Portal>
-    <AnimatePresence>
-      {item && (
-        <motion.div
-          className="on-dark fixed inset-0 z-[70] flex flex-col bg-tinta/95 text-parede backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35 }}
-          role="dialog"
-          aria-modal="true"
-          aria-label={item.legenda}
-        >
-          <div className="flex items-center justify-between px-4 py-4 text-sm sm:px-8">
-            <span className="text-parede/60">
-              {indice! + 1} de {itens.length}
-            </span>
-            <button ref={fechar} type="button" onClick={aoFechar} className="-mr-2 p-2">
-              Fechar
-            </button>
-          </div>
+      <AnimatePresence>
+        {item && (
+          <motion.div
+            className="on-dark fixed inset-0 z-[70] flex flex-col bg-tinta/95 text-parede backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={item.legenda}
+          >
+            <div className="flex items-center justify-between px-4 py-4 text-sm sm:px-8">
+              <span className="text-parede/60">
+                {indice! + 1} de {itens.length}
+              </span>
+              <button ref={fechar} type="button" onClick={aoFechar} className="-mr-2 p-2">
+                Fechar
+              </button>
+            </div>
 
-          <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 sm:px-20" onClick={aoFechar}>
-            <AnimatePresence mode="wait">
-              <motion.figure
-                key={item.id}
-                className="flex h-full max-h-full w-full flex-col items-center justify-center"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative h-full max-h-[78svh] w-full">
-                  {item.tipo === "imagem" && item.src ? (
-                    <Image src={item.src} alt={item.alt} fill sizes="100vw" className="object-contain" />
-                  ) : item.tipo === "video" && item.src ? (
-                    <video
-                      src={item.src}
-                      poster={item.poster}
-                      controls
-                      autoPlay
-                      playsInline
-                      className="absolute inset-0 h-full w-full object-contain"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 grid place-items-center p-8">
-                      <Esboco motivo={item.motivo} animar="montagem" className="h-full max-h-[60svh] w-full" />
-                    </div>
-                  )}
-                </div>
-                <figcaption className="mt-5 font-display text-lg italic">{item.legenda}</figcaption>
-              </motion.figure>
-            </AnimatePresence>
+            <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 sm:px-20" onClick={aoFechar}>
+              <AnimatePresence mode="wait">
+                <motion.figure
+                  key={item.id}
+                  className="flex h-full max-h-full w-full flex-col items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="relative h-full max-h-[78svh] w-full">
+                    {item.tipo === "imagem" && item.src ? (
+                      <Image src={item.src} alt={item.alt} fill sizes="100vw" className="object-contain" />
+                    ) : item.tipo === "video" && item.src ? (
+                      <video
+                        src={item.src}
+                        poster={item.poster}
+                        controls
+                        autoPlay
+                        playsInline
+                        className="absolute inset-0 h-full w-full object-contain"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 grid place-items-center p-8">
+                        <Esboco motivo={item.motivo} animar="montagem" className="h-full max-h-[60svh] w-full" />
+                      </div>
+                    )}
+                  </div>
+                  <figcaption className="mt-5 font-display text-lg italic">{item.legenda}</figcaption>
+                </motion.figure>
+              </AnimatePresence>
 
-            {itens.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    ir(-1);
-                  }}
-                  className="absolute left-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-parede/25 transition-colors hover:bg-parede hover:text-tinta sm:left-6"
-                  aria-label="Anterior"
-                >
-                  <Seta direcao="esquerda" />
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    ir(1);
-                  }}
-                  className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-parede/25 transition-colors hover:bg-parede hover:text-tinta sm:right-6"
-                  aria-label="Próximo"
-                >
-                  <Seta direcao="direita" />
-                </button>
-              </>
-            )}
-          </div>
-          <div className="h-6" />
-        </motion.div>
-      )}
-    </AnimatePresence>
+              {itens.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      ir(-1);
+                    }}
+                    className="absolute left-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-parede/25 transition-colors hover:bg-parede hover:text-tinta sm:left-6"
+                    aria-label="Anterior"
+                  >
+                    <Seta direcao="esquerda" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      ir(1);
+                    }}
+                    className="absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-parede/25 transition-colors hover:bg-parede hover:text-tinta sm:right-6"
+                    aria-label="Próximo"
+                  >
+                    <Seta direcao="direita" />
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="h-6" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Portal>
   );
 }

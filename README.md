@@ -15,7 +15,7 @@ Tudo fica em `src/content/site.ts`: contatos, serviços, passos do orçamento, a
 
 ### Trocar os esboços por fotos e vídeos reais
 
-Os itens da galeria que ainda não têm `src` aparecem como esboço em traço fino. Para colocar a foto ou o vídeo real:
+Os trabalhos ficam em `public/trabalhos/`. Itens sem `src` aparecem como esboço em traço fino. Para adicionar um trabalho:
 
 1. Salve o arquivo em `public/trabalhos/` (trabalhos) ou `public/estudio/` (estúdio).
 2. No item correspondente em `site.ts`, preencha `src`, por exemplo `src: "/trabalhos/lirio-antebraco.jpg"`.
